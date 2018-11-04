@@ -1,0 +1,12 @@
+<% include ./partials/header %>
+
+<h1>Welcome to Camp Grounds</h1>
+
+    <%campgrounds.forEach(function(campground) {%>
+      <%let imageUrl = campground.image;%>
+      <h4><%=campground.name%></h4>
+      <img src=<%=imageUrl%> alt="picture" height="300px">"
+    <%});%>
+
+    <% include ./partials/footer %>
+
