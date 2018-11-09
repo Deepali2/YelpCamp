@@ -1,11 +1,14 @@
-<% include ./partials/header.ejs%>
+<% include ../partials/header.ejs%>
 
-<%=console.log(campground);%>
+
 <h1><%=campground[0].name%></h1>
 <img src="<%=campground[0].image%>" alt="picture">
 <p><%=campground[0].description%></p>
+<p>
+  <a class="btn btn-success" href="/campgrounds/<%=campground[0]._id%>/comments/new">Add New Comment</a>
+</p>
 <%campground[0].comments.forEach(function(comment) {%>
   <p><strong><%=comment.author%></strong> - <%=comment.text%></p>
 <%});%>
 
-<%include ./partials/footer.ejs%>
+<%include ../partials/footer.ejs%>
