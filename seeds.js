@@ -16,7 +16,7 @@ const data =[
   },
   {
     name: "The Lost Coast", 
-    image: "https://pixabay.com/get/e03db50f2af41c22d2524518b7444795ea76e5d004b0144597f1c77da1ecbc_340.jpg",
+    image: "https://farm4.staticflickr.com/3161/2912828002_de5e2f7b4e.jpg",
     description: loremIpsum({count: 20, units: "sentences"}),
   }
 ];
