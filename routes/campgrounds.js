@@ -5,7 +5,7 @@ const express    = require("express"),
 
 
 //INDEX route - show all campgrounds
-router.get("/campgrounds", function(req, res) { 
+router.get("/", function(req, res) { 
   //get all the campgrounds from DB
   Campground.find({}, function(err, allCampgrounds) {
     if (err) console.log("There is an error in getting all the campgrounds: ", err);
@@ -15,7 +15,7 @@ router.get("/campgrounds", function(req, res) {
 });
 
 //CREATE route - add new campground to database
-router.post("/campgrounds", function(req, res) {  
+router.post("/", function(req, res) {  
   let name = req.body.name;
   let image = req.body.image;
   let desc = req.body.description;
@@ -30,12 +30,12 @@ router.post("/campgrounds", function(req, res) {
 });
 
 //NEW route - Show form to create a vew campground
-router.get("/campgrounds/new", function(req, res) {  
+router.get("/new", function(req, res) {  
   res.render("campgrounds/new");
 });
 
 //SHOW - shows more info about one campground
-router.get("/campgrounds/:id", function(req, res) {  
+router.get("/:id", function(req, res) {  
   Campground.find({"_id": ObjectId(req.params.id)}).populate("comments").exec(function(err, foundCampground) {
     if (err) console.log("Error in getting More Info: ", foundCampground);
     else {      
@@ -44,6 +44,7 @@ router.get("/campgrounds/:id", function(req, res) {
   });  
 });
 
+//middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/login");

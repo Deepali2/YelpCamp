@@ -13,6 +13,7 @@ const express               = require("express"),
       User                  = require("./models/user"),
       Comment               = require("./models/comment");
 
+//requiring routes
 const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes       = require("./routes/index");
@@ -42,9 +43,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(authRoutes);
-app.use(campgroundRoutes);
-app.use(commentRoutes);
+app.use("/", authRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 //seeding the data
 seedDB();

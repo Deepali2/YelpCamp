@@ -1,14 +1,12 @@
 const express    = require("express"),
-      router     = express.Router(),
+      router     = express.Router({mergeParams: true}),
       Campground = require("../models/campground"),
       Comment    = require("../models/comment"),
       ObjectId   = require("mongodb").ObjectID;
-//====================
-//COMMENTS ROUTES
-//====================
+
 
 //NEW ROUTE
-router.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res) {
+router.get("/new", isLoggedIn, function(req, res) {
   //find campground by id
   Campground.find({"_id": ObjectId(req.params.id)}, function(err, campground) {
     if (err) console.log(err);
@@ -19,7 +17,7 @@ router.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res) {
 });
 
 //CREATE ROUTE
-router.post("/campgrounds/:id/comments", isLoggedIn, function(req, res) {  
+router.post("/", isLoggedIn, function(req, res) {  
   // lookup campground using id
   Campground.find({"_id": ObjectId(req.params.id)}, function(err, campground) {
      if (err) {
@@ -42,6 +40,7 @@ router.post("/campgrounds/:id/comments", isLoggedIn, function(req, res) {
   //redirect campground show page
 });
 
+//middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/login");
