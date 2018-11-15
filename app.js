@@ -47,8 +47,8 @@ app.use("/", authRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-//seeding the data
-seedDB();
+//seeding the database
+// seedDB();
 
 app.listen(3003, function(req, res) {
   console.log("I am listening on port 3003");

@@ -29,9 +29,15 @@ router.post("/", isLoggedIn, function(req, res) {
        Comment.create(req.body.comment, function(err, comment) {
          if (err) console.log(err);
          else {
+           //add username and id to comment
+           comment.author.id = req.user._id;
+           comment.author.username = req.user.username;
+           //save the comment
+           comment.save();
            //connect the new comment to campground
            campground[0].comments.push(comment);
            campground[0].save();
+           console.log(comment);
            res.redirect("/campgrounds/" + campground[0]._id);
          }
        });
