@@ -6,7 +6,8 @@ const express               = require("express"),
       loremIpsum            = require("lorem-ipsum"),
       passport              = require("passport"),
       LocalStrategy         = require("passport-local"),
-      passportLocalMongoose = require("passport-local-mongoose"),
+      methodOverride        = require("method-override"),
+      // passportLocalMongoose = require("passport-local-mongoose"),
       ObjectId              = require("mongodb").ObjectID,
       Campground            = require("./models/campground"),
       seedDB                = require("./seeds"),
@@ -24,6 +25,7 @@ mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: t
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
