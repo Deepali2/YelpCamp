@@ -2,6 +2,7 @@ const express               = require("express"),
       app                   = express(),
       bodyParser            = require("body-parser"),
       mongoose              = require("mongoose"),
+      flash                 = require("connect-flash"),
       faker                 = require("faker"),
       loremIpsum            = require("lorem-ipsum"),
       passport              = require("passport"),
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(flash());
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
