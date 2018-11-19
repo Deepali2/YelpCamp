@@ -71,7 +71,6 @@ router.put("/:id", checkCampgroundOwnership, function(req, res) {
 
 //DESTROY CAMPGROUND ROUTE
 router.delete("/:id", checkCampgroundOwnership, function(req, res) {
-  console.log("I am the id in the delete route", req.params.id);
   Campground.findByIdAndDelete(req.params.id, function(err, campground) {
     if (err) {
       console.log(err);      
