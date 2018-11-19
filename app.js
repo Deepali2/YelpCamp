@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
-app.use(flash());
+app.use(flash()); //must come before passport configuration
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -44,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 //our own middleware
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error"); //flash message
+  res.locals.success = req.flash("success"); //flash message
   next();
 });
 
