@@ -95,7 +95,6 @@ function checkCampgroundOwnership(req, res, next) {
       }
       else {
         //does the user own the campground?
-        console.log("I am the id being authenticated", foundCampground[0].author.id);
         if(foundCampground[0].author.id.equals(req.user._id)) {
           next();
         } else {
