@@ -9,21 +9,25 @@ const middlewareObj = {};
 middlewareObj.checkCampgroundOwnership = function (req, res, next) {
   //authorization: is the user logged in
   if (req.isAuthenticated()) {    
-    Campground.find({"_id": ObjectId(req.params.id)}, function(err, foundCampground) {
-      if (err) {
-        console.log(err);
+    Campground.findById(req.params.id, function(err, foundCampground) {
+      if (err || !foundCampground) {
+        console.log("in the if route:", foundCampground);
+        req.flash("error", "Campground not found");        
         res.redirect("back");
       }
       else {
+        console.log("in the else route", foundCampground);
         //does the user own the campground?
-        if(foundCampground[0].author.id.equals(req.user._id)) {
+        if(foundCampground.author.id.equals(req.user._id)) {
           next();
         } else {
+          req.flash("error", "You do not have the right permissions to do that!");
           res.redirect("back");
         }        
       }
     });
   } else {
+    req.flash("error", "You have to be logged in!");
     res.redirect("back");
   } 
 }
@@ -41,18 +45,20 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
         if(foundComment[0].author.id.equals(req.user._id)) {
           next();
         } else {
+          req.flash("error", "You do not have permission to do that");
           res.redirect("back");
         }        
       }
     });
   } else {
+    req.flash("error", "You need to be logged in to do that");
     res.redirect("back");
   } 
 }
 
 middlewareObj.isLoggedIn = function(req, res, next) {
   if (req.isAuthenticated()) return next();
-  req.flash("error", "Please login First!");
+  req.flash("error", "You need to be logged in to do that");
   res.redirect("/login");
 }
 
