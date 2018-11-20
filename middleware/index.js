@@ -11,12 +11,10 @@ middlewareObj.checkCampgroundOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {    
     Campground.findById(req.params.id, function(err, foundCampground) {
       if (err || !foundCampground) {
-        console.log("in the if route:", foundCampground);
         req.flash("error", "Campground not found");        
         res.redirect("back");
       }
       else {
-        console.log("in the else route", foundCampground);
         //does the user own the campground?
         if(foundCampground.author.id.equals(req.user._id)) {
           next();

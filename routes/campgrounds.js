@@ -29,7 +29,6 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     else {
       // newCampground.author.id = req.user._id;
       // newCampground.author.username = req.user.username;
-      console.log("Successfully created a new campground");
       res.redirect("/campgrounds");
     }
   });  
@@ -42,8 +41,11 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 //SHOW - shows more info about one campground
 router.get("/:id", function(req, res) {  
-  Campground.find({"_id": ObjectId(req.params.id)}).populate("comments").exec(function(err, foundCampground) {
-    if (err) console.log("Error in getting More Info: ", foundCampground);
+  Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground) {
+    if (err || !foundCampground) {      
+      req.flash("error", "Campground not found");
+      res.redirect("back");      
+    }
     else {      
       res.render("campgrounds/show", {campground: foundCampground});
     }
@@ -61,8 +63,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res) 
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res) {
   //find and update the correct campground
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground) {
-    if (err) {
-      console.log(err);
+    if (err) {      
       res.redirect("/campgrounds");
     } else {
       res.redirect("/campgrounds/" + req.params.id);
