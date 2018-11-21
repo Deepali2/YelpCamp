@@ -16,14 +16,16 @@ router.get("/", function(req, res) {
 
 //CREATE route - add new campground to database
 router.post("/", middleware.isLoggedIn, function(req, res) {
+  console.log("This is the req.body ", req.body)
   let name = req.body.name;
+  let price = req.body.price;
   let image = req.body.image;
   let desc = req.body.description;
   let author = {
     id: req.user._id,
     username: req.user.username
   }
-  let newCampground = {name: name, image: image, description: desc, author: author};
+  let newCampground = {name: name, price: price, image: image, description: desc, author: author};
   Campground.create(newCampground, function(err, newlyCreated) {    
     if (err) console.log("There was an error in creating a new campground: ", err);
     else {
@@ -54,7 +56,7 @@ router.get("/:id", function(req, res) {
 
 //EDIT CAMPGROUND ROUTE
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res) {
-  Campground.find({"_id": ObjectId(req.params.id)}, function(err, foundCampground) {
+  Campground.findById(req.params.id, function(err, foundCampground) {
     res.render("campgrounds/edit", {campground: foundCampground});  
   });    
 });
@@ -63,7 +65,8 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res) 
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res) {
   //find and update the correct campground
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground) {
-    if (err) {      
+    if (err) { 
+      console.log("Error in updating campground info", err);   
       res.redirect("/campgrounds");
     } else {
       res.redirect("/campgrounds/" + req.params.id);

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 //SCHEMA SETUP
 const campgroundSchema = new mongoose.Schema({
   name: String,
+  price: String, //storing the price as a string allows us to preserve the formatting
   image: String,
   description: String,
   author: {
