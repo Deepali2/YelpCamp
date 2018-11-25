@@ -20,8 +20,11 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes       = require("./routes/index");
 
-// mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
-mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1");
+console.log(process.env.DATABASEURL);
+
+// mongoose.connect("process.env.DATABASEURL", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
+// mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1");
 
 //tell express to use body-parser and other middleware
 app.use(bodyParser.urlencoded({extended: true}));
