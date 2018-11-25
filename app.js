@@ -20,12 +20,12 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes       = require("./routes/index");
 
-console.log(process.env.PORT);
+console.log(process.env.DATABASEURL);
 
 const url = "process.env.DATABASEURL";
 
 
-mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
 
 // mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
 mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1", {useNewUrlParser: true});
