@@ -22,13 +22,11 @@ const commentRoutes    = require("./routes/comments"),
 
 console.log(process.env.DATABASEURL);
 
-const url = "process.env.DATABASEURL";
-
-
-// mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
+const url = process.env.DATABASEURL || "mongodb://localhost:27017/campground_app";
+mongoose.connect(url, {useNewUrlParser: true});
 
 // mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
-mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1", {useNewUrlParser: true});
+// mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1", {useNewUrlParser: true});
 
 //tell express to use body-parser and other middleware
 app.use(bodyParser.urlencoded({extended: true}));
