@@ -20,11 +20,15 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes       = require("./routes/index");
 
-console.log(process.env.DATABASEURL);
+console.log(process.env.PORT);
 
-// mongoose.connect("process.env.DATABASEURL", {useNewUrlParser: true});
+const url = "process.env.DATABASEURL";
+
+
+mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
+
 // mongoose.connect("mongodb://localhost:27017/campground_app", {useNewUrlParser: true});
-mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1");
+mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1", {useNewUrlParser: true});
 
 //tell express to use body-parser and other middleware
 app.use(bodyParser.urlencoded({extended: true}));
@@ -60,6 +64,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //seeding the database
 // seedDB();
 
-app.listen(process.env.PORT||3003, function(req, res) {
-  console.log("I am listening on port 3003");
+const PORT = process.env.PORT||3003
+app.listen(PORT, function(req, res) {
+  console.log("The server is listening on port ", PORT);
 });
