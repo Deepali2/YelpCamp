@@ -45,7 +45,9 @@ router.get("/login", function(req, res) {
 router.post("/login", passport.authenticate("local", 
   {
   successRedirect: "/campgrounds",
-  failureRedirect: "/login"
+  failureRedirect: "/login",
+  failureFlash: true,
+  successFlash: "Welcome to YelpCamp!"
   }), function(req, res) {
 });
 
@@ -54,6 +56,48 @@ router.get("/logout", function(req, res) {
   req.logout();
   req.flash("success", "Logged you out!");
   res.redirect("/campgrounds");
+});
+
+//EDIT USER ROUTE
+router.get("/users/:id/edit", function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+      res.redirect("/campgrounds");
+    } else {
+      res.render("editUser", {user: foundUser});
+    }
+  });  
+});
+
+//UPDATE USER ROUTE
+router.put("/users/:id", function(req, res) { 
+  console.log("req.params.id is: ", req.params.id);
+  console.log("req.body.username is: ", req.body.username);
+  
+  User.findByIdAndUpdate(req.params.id, req.body.username, function(err, updatedUser) {
+    if(err) {
+      req.flash("error", "Something went wrong");
+      res.redirect("/users/:id/edit");
+    }
+    else {
+      req.flash("success", "Your account information has been updated");
+      res.redirect("/users/:id/edit");
+    }
+  });
+});
+
+//DESTROY ROUTE for USER
+router.delete("/users/:id", function(req, res) {
+  User.findByIdAndDelete(req.params.id, function(err, user) {
+    if (err) {
+      console.log("Error in deleting user: ", err);
+      res.redirect("/users/:id")
+    } else {
+      req.flash("success", "Your user account has been deleted");
+      res.redirect("/campgrounds");
+    }
+  });
 });
 
 module.exports = router;
