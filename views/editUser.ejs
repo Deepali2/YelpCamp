@@ -1,23 +1,19 @@
 <% include ./partials/header.ejs %>
-<h2>Edit Account Info for <em><%=user.username%></em></h2>
-
+<h2>Delete Account for <em><%=user.username%></em>?</h2>
+<p>Warning! If you delete your account you will no longer be able to edit/delete the campgrounds/comments that you have posted</p>
+<!-- <%=console.log(user)%>
 <form action="/users/<%= user._id %>?_method=PUT" method="POST"> 
   <div>
     <input type="text" value="<%=user.username%>" name="username">
   </div>
   <div>
-    <input type="password" placeholder="Current Password" name="currentPassword">
+    <input type="password" value="<%=user.__v%>" name="password">
   </div>
-  <div>
-    <input type="password" placeholder="New Password" name="newPassword">
-  </div>
-  <div>
-    <input type="password" placeholder="Confirm New Password" name="confirmNewPassword">
-  </div> 
+ 
   <div>
     <input type="submit" value="Update">
   </div>   
-</form>
+</form> -->
 
 <form class="delete-form" action="/users/<%= user._id %>?_method=DELETE" method="POST">
   <input type="submit" class="btn btn-xs btn-danger" value="Delete Account">

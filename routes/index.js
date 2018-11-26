@@ -54,7 +54,7 @@ router.post("/login", passport.authenticate("local",
 //LOGOUT ROUTE
 router.get("/logout", function(req, res) {
   req.logout();
-  req.flash("success", "Logged you out!");
+  req.flash("success", "See You Later!");
   res.redirect("/campgrounds");
 });
 
@@ -71,21 +71,22 @@ router.get("/users/:id/edit", function(req, res) {
 });
 
 //UPDATE USER ROUTE
-router.put("/users/:id", function(req, res) { 
-  console.log("req.params.id is: ", req.params.id);
-  console.log("req.body.username is: ", req.body.username);
+// router.put("/users/:id", function(req, res) { 
+//   console.log("req.params.id is: ", req.params.id);
+//   console.log("req.body is: ", req.body);
   
-  User.findByIdAndUpdate(req.params.id, req.body.username, function(err, updatedUser) {
-    if(err) {
-      req.flash("error", "Something went wrong");
-      res.redirect("/users/:id/edit");
-    }
-    else {
-      req.flash("success", "Your account information has been updated");
-      res.redirect("/users/:id/edit");
-    }
-  });
-});
+//   User.findByIdAndUpdate(req.params.id, req.body.username, function(err, updatedUser) {
+
+//     if(err) {
+//       req.flash("error", "Something went wrong");
+//       res.redirect("/users/:id/edit");
+//     }
+//     else {
+//       req.flash("success", "Your account information has been updated");
+//       res.redirect("/users/:id/edit");
+//     }
+//   });
+// });
 
 //DESTROY ROUTE for USER
 router.delete("/users/:id", function(req, res) {
