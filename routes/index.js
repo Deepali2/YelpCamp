@@ -1,11 +1,15 @@
-const express  = require("express"),
-      router   = express.Router(),
-      passport = require("passport"),
-      User     = require("../models/user");
+const express    = require("express"),
+      router     = express.Router(),
+      passport   = require("passport"),
+      User       = require("../models/user"),
+      Campground = require("../models/campground"),
+      async      = require("async"),
+      nodemailer = require("nodemailer"),
+      crypto     = require("crypto");
 
 //ROUTES
 router.get("/", function(req, res) {
-  res.render("landing");
+  res.render("./users/landing");
 });
 
 //==================
@@ -15,7 +19,7 @@ router.get("/", function(req, res) {
 //Register ROUTES
 //show register form
 router.get("/register", function(req, res) {
-  res.render("register");
+  res.render("./users/register");
 });
 
 //handling user registration
@@ -39,7 +43,7 @@ router.post("/register", function(req, res) {
 //LOGIN ROUTES
 //show login form
 router.get("/login", function(req, res) {
-  res.render("login");
+  res.render("./users/login");
 });
 //handle user login
 router.post("/login", passport.authenticate("local", 
@@ -58,14 +62,19 @@ router.get("/logout", function(req, res) {
   res.redirect("/campgrounds");
 });
 
+//FORGOT PASSWORD ROUTES
+router.get("/forgot", function(req, res) {
+  res.render("./users/forgot");
+});
+
 //EDIT USER ROUTE
-router.get("/users/:id/edit", function(req, res) {
+router.get("/users/:id/edit", function(req, res) {  
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
       res.redirect("/campgrounds");
     } else {
-      res.render("editUser", {user: foundUser});
+      res.render("./users/editUser", {user: foundUser});
     }
   });  
 });
