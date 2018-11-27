@@ -6,6 +6,7 @@ const campgroundSchema = new mongoose.Schema({
   price: String, //storing the price as a string allows us to preserve the formatting
   image: String,
   description: String,
+  createdAt: {type: Date, default: Date.now},
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

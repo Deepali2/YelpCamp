@@ -3,6 +3,7 @@ const express    = require("express"),
       Campground = require("../models/campground"),
       Comment    = require("../models/comment"),
       ObjectId   = require("mongodb").ObjectID,
+      // today      = require("../date.js"),
       middleware = require("../middleware");// since the file is names index.js, we do not need to write middleware/index.js
 
 

@@ -23,6 +23,7 @@ const commentRoutes    = require("./routes/comments"),
 console.log(process.env.DATABASEURL);
 
 
+
 const url = process.env.DATABASEURL || "mongodb://localhost:27017/campground_app";
 mongoose.connect(url, {useNewUrlParser: true});
 
@@ -35,6 +36,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(flash()); //must come before passport configuration
+app.locals.moment = require("moment");http://slides.com/nax3t/yelpcamp-refactor-moment
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({

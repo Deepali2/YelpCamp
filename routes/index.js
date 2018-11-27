@@ -24,7 +24,7 @@ router.get("/register", function(req, res) {
 
 //handling user registration
 router.post("/register", function(req, res) {
-  const newUser = new User({username: req.body.username});
+  const newUser = new User({username: req.body.username, email: req.body.email});
   User.register(newUser, req.body.password, function(err, user) {
     if(err) {
       console.log(err);      
@@ -65,6 +65,62 @@ router.get("/logout", function(req, res) {
 //FORGOT PASSWORD ROUTES
 router.get("/forgot", function(req, res) {
   res.render("./users/forgot");
+});
+
+//HANDLE RESET PASSWORD
+router.post("/forgot", function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        const token = buf.toString("hex");
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({email: req.body.email}, function(err, user) {
+        if (!user) {
+          req.flash("error", "No account with that email address exists.");
+          return res.redirect("/forgot");
+        }
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; //1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {      
+      const smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "deepaligarg251@gmail.com",
+          pass: process.env.GMAILPW
+          
+        }
+      });
+      const mailOptions = {
+        to: user.email,
+        from: "deepaligarg251@gmail.com",
+        subject: "Password Reset",
+        text: "You are receiving this because you(or someone else) " +
+        "have requested the reset of your password. Please click on " +
+        "the following link, or paste this into your browser to " +
+        "complete the process." + "\n\n" +
+        "https://" + req.headers.host + "/reset/" + token + "\n\n" +
+        "If you did not request this, please ignore this email and your password " +
+        "will remain unchanged."
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log("mail sent");
+        req.flash("success", "An e-mail has been sent to " + user.email + "with further instructions.");
+        done(err, "done");
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect("/forgot");
+  });
 });
 
 //EDIT USER ROUTE
