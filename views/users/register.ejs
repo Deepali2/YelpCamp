@@ -1,16 +1,35 @@
 <%include ../partials/header.ejs%>
 
-<h1>Sign up form</h1>
-<form action="/register" method="POST">
-  <input type="text" placeholder="username" name="username"> 
-  <input type="email" placeholder="email" name="email">
-  <input type="text" placeholder="password" name="password">
-  <button>Sign Up</button>
-</form>
-
-<li><a href="/register">Sign Up</a></li>
-<li><a href="/login">Login</a></li>
-<li><a href="/logout">Logout</a></li>
+<div class="row">
+    <h1>Sign Up</h1>
+    <div class="login">
+        <form action="/register" method="POST">
+          <div class="form-group">
+              <input required type="text" placeholder="username" name="username" class="form-control">  
+          </div>
+          <div class="form-group">
+              <input required type="password" placeholder="password" name="password" class="form-control">
+          </div>
+          <div class="form-group">
+              <input required type="text" placeholder="first name" name="first name" class="form-control">  
+          </div>
+          <div class="form-group">
+              <input required type="text" placeholder="last name" name="last name" class="form-control">  
+          </div>
+          <div class="form-group">
+              <input required type="email" placeholder="email" name="email" class="form-control">  
+          </div>
+          <div class="form-group">
+              <input type="text" placeholder="avatar url (optional)" name="avatar" class="form-control">  
+          </div>
+          <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+            <!-- <input type="submit" value="login" class="form-control"> -->
+          </div>
+        </form>
+        <a href="/campgrounds">Go Back</a>
+        </div>
+  </div>
 
 
 <%include ../partials/footer.ejs%>

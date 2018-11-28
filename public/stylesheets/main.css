@@ -14,3 +14,15 @@
   display: inline;
 }
 
+h1 {
+  text-align: center;
+}
+
+.login {
+  width: 30%;
+  margin: 25px auto;
+}
+
+.right {
+  float: right;
+}

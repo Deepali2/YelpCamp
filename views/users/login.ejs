@@ -1,19 +1,25 @@
 <% include ../partials/header.ejs %>
 
 
-<h1>Login form</h1>
-
-<form action="/login" method="POST">
-  <input type="text" placeholder="username" name="username">   
-  <input type="password" placeholder="password" name="password">
-  <!-- <button>Login</button> -->
-  <input type="submit" value="login">
-</form>
-
-<li><a href="/campgrounds">See all campgrounds</a></li>
-<li><a href="/register">Sign Up</a></li>
-<li><a href="/login">Login</a></li>
-<li><a href="/logout">Logout</a></li>
+<div class="row">
+  <h1>Login</h1>
+  <div class="login">
+      <form action="/login" method="POST">
+        <div class="form-group">
+            <input type="text" placeholder="username" name="username" class="form-control">  
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="password" name="password" class="form-control">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block">Login</button>
+          <!-- <input type="submit" value="login" class="form-control"> -->
+        </div>        
+      </form>
+      <a href="/campgrounds">Go Back</a>
+      <a class="right" href="/forgot">Forgot Password</a>
+      </div>
+</div>
 
 <% include ../partials/footer.ejs %>
 
