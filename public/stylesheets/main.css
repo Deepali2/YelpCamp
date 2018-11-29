@@ -26,3 +26,8 @@ h1 {
 .right {
   float: right;
 }
+
+.myname {
+  text-align: center
+}
+
