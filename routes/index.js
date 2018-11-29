@@ -102,7 +102,6 @@ router.post("/forgot", function(req, res, next) {
       });
     },
     function(token, user, done) {  
-      console.log(process.env.GMAILPW);    
       const smtpTransport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -142,7 +141,6 @@ router.get("/reset/:token", function(req, res) {
       req.flash("error", "Password Reset Token is invalid or has expired.");
       return res.redirect("/forgot");
     } 
-    console.log(req.params.token);
     res.render("reset", {token: req.params.token});
   });    
 });
@@ -176,6 +174,7 @@ router.post("/reset/:token", function(req, res) {
       const smtpTransport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
+          type: "login",
           user: "deepali.noreply@gmail.com",
           pass: process.env.GMAILPW
         }

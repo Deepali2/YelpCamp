@@ -22,7 +22,6 @@ const commentRoutes    = require("./routes/comments"),
 
 console.log(process.env.DATABASEURL);
 
-
 const url = process.env.DATABASEURL || "mongodb://localhost:27017/campground_app";
 mongoose.connect(url, {useNewUrlParser: true});
 
