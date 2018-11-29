@@ -5,23 +5,28 @@
     <div class="login">
         <form action="/register" method="POST">
           <div class="form-group">
-              <input required type="text" placeholder="username" name="username" class="form-control">  
+              <input type="text" placeholder="username" name="username" class="form-control">  
           </div>
           <div class="form-group">
-              <input required type="password" placeholder="password" name="password" class="form-control">
+              <input type="password" placeholder="password" name="password" class="form-control">
           </div>
           <div class="form-group">
-              <input required type="text" placeholder="first name" name="first name" class="form-control">  
+              <input type="text" placeholder="first name" name="firstName" class="form-control">  
           </div>
           <div class="form-group">
-              <input required type="text" placeholder="last name" name="last name" class="form-control">  
+              <input type="text" placeholder="last name" name="lastName" class="form-control">  
           </div>
           <div class="form-group">
-              <input required type="email" placeholder="email" name="email" class="form-control">  
+              <input type="email" placeholder="email" name="email" class="form-control">  
+          </div>         
+          <div class="form-group">
+              <input type="text" placeholder="avatar url" name="avatar" class="form-control">  
           </div>
           <div class="form-group">
-              <input type="text" placeholder="avatar url (optional)" name="avatar" class="form-control">  
-          </div>
+              <label for="aboutAuthor">About the Author</label>
+              <textarea type="text" placeholder="About the Author" name="aboutAuthor" class="form-control" cols="25" rows="5">  
+              </textarea>
+         </div>
           <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
             <!-- <input type="submit" value="login" class="form-control"> -->

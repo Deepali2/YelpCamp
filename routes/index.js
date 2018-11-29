@@ -24,13 +24,18 @@ router.get("/register", function(req, res) {
 
 //handling user registration
 router.post("/register", function(req, res) {
-  const newUser = new User({
+  console.log(req.body);
+  const newUser = new User(//req.body
+    {
     username: req.body.username, 
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    avatar: req.body.avatar
-  });
+    avatar: req.body.avatar,
+    aboutAuthor: req.body.aboutAuthor
+    }
+  );
+  // eval(require("locus"));
   User.register(newUser, req.body.password, function(err, user) {
     if(err) {
       console.log(err);      
@@ -194,6 +199,33 @@ router.post("/reset/:token", function(req, res) {
   });
 });
 
+//USER PROFILE
+router.get("/users/:id", function(req,res) {  
+  User.findById(req.params.id, function(err, foundUser) {    
+    if ( !foundUser || err) {
+      req.flash("error", "This user no longer exists");
+      return res.redirect("/");
+    } 
+    console.log("foundUser is: ", foundUser);
+    console.log("foundUser._id is: ", foundUser._id);
+    console.log("Campground.find() is: ", Campground.find());
+    
+    Campground.find().where('author.id').equals(foundUser._id).exec(function(err, campgrounds) {
+    // Campground.find().where("author.id").equals(foundUser._id).exec(function(err, campgrounds) {
+      console.log("campgrounds is: ", campgrounds);
+      if (err) {
+        req.flash("error", "Something went wrong");
+        return res.redirect("/");
+      }  
+      res.render("../views/users/show", {user: foundUser, campgrounds: campgrounds});     
+    })  
+    
+  });
+  
+});
+
+
+
 //EDIT USER ROUTE
 router.get("/users/:id/edit", function(req, res) {  
   User.findById(req.params.id, function(err, foundUser) {
@@ -201,7 +233,7 @@ router.get("/users/:id/edit", function(req, res) {
       console.log(err);
       res.redirect("/campgrounds");
     } else {
-      res.render("views/users/editUser", {user: foundUser});
+      res.render("./views/users/editUser", {user: foundUser});
     }
   });  
 });
