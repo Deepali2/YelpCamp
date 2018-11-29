@@ -17,8 +17,8 @@
                 <% if (!currentUser) { %>
                   <li><a href="/login">Login</a></li>
                   <li><a href="/register">Sign Up</a></li>
-                <% } else { %>                  
-                  <li><a href="users/<%=currentUser._id%>/edit">Hello <%= currentUser.username %>!</a></li>
+                <% } else { %>
+                  <li><a href="#">Hello <%= currentUser.username %>!</a></li>
                   <li><a href="/logout">Logout</a></li>
                 <% } %>             
                 

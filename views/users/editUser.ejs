@@ -1,15 +1,19 @@
 <% include ../partials/header.ejs %>
-<h2>Delete Account for <em><%=user.username%></em>?</h2>
-<p>Warning! If you delete your account you will no longer be able to edit/delete the campgrounds/comments that you have posted</p>
-
-
-<form class="delete-form" action="/users/<%= user._id %>?_method=DELETE" method="POST">
-  <input type="submit" class="btn btn-xs btn-danger" value="Delete Account">
-</form>
-
-<li><a href="/campgrounds">See all campgrounds</a></li>
-<li><a href="/register">Sign Up</a></li>
-<li><a href="/login">Login</a></li>
-<li><a href="/logout">Logout</a></li>
+<div class="row">
+  <h1>Delete Account for <em><%=user.username%></em>?</h1>
+  <hr>
+  <div class="login"> 
+    <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+      <div class="form-group">
+          <p>Warning! If you delete your account you will no longer be able to edit/delete the campgrounds/comments that you have posted</p>
+      </div>
+      <div>
+          <input type="submit" class="btn btn-xs btn-danger form-control" value="Delete Account">
+      </div>
+      
+    </form>
+    <a href="/campgrounds">Go Back</a>
+  </div>      
+</div>
 
 <% include ../partials/footer.ejs %>

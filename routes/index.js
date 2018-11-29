@@ -205,14 +205,9 @@ router.get("/users/:id", function(req,res) {
     if ( !foundUser || err) {
       req.flash("error", "This user no longer exists");
       return res.redirect("/");
-    } 
-    console.log("foundUser is: ", foundUser);
-    console.log("foundUser._id is: ", foundUser._id);
-    console.log("Campground.find() is: ", Campground.find());
+    }  
     
     Campground.find().where('author.id').equals(foundUser._id).exec(function(err, campgrounds) {
-    // Campground.find().where("author.id").equals(foundUser._id).exec(function(err, campgrounds) {
-      console.log("campgrounds is: ", campgrounds);
       if (err) {
         req.flash("error", "Something went wrong");
         return res.redirect("/");
@@ -233,28 +228,28 @@ router.get("/users/:id/edit", function(req, res) {
       console.log(err);
       res.redirect("/campgrounds");
     } else {
-      res.render("./views/users/editUser", {user: foundUser});
+      res.render("../views/users/editUser", {user: foundUser});
     }
   });  
 });
 
 //UPDATE USER ROUTE
-// router.put("/users/:id", function(req, res) { 
-//   console.log("req.params.id is: ", req.params.id);
-//   console.log("req.body is: ", req.body);
+router.put("/users/:id", function(req, res) { 
+  console.log("req.params.id is: ", req.params.id);
+  console.log("req.body is: ", req.body);
   
-//   User.findByIdAndUpdate(req.params.id, req.body.username, function(err, updatedUser) {
+  User.findByIdAndUpdate(req.params.id, req.body.username, function(err, updatedUser) {
 
-//     if(err) {
-//       req.flash("error", "Something went wrong");
-//       res.redirect("/users/:id/edit");
-//     }
-//     else {
-//       req.flash("success", "Your account information has been updated");
-//       res.redirect("/users/:id/edit");
-//     }
-//   });
-// });
+    if(err) {
+      req.flash("error", "Something went wrong");
+      res.redirect("/users/:id/edit");
+    }
+    else {
+      req.flash("success", "Your account information has been updated");
+      res.redirect("/users/:id/edit");
+    }
+  });
+});
 
 //DESTROY ROUTE for USER
 router.delete("/users/:id", function(req, res) {
