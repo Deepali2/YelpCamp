@@ -35,7 +35,6 @@ router.post("/register", function(req, res) {
     aboutAuthor: req.body.aboutAuthor
     }
   );
-  // eval(require("locus"));
   User.register(newUser, req.body.password, function(err, user) {
     if(err) {
       console.log(err);      
