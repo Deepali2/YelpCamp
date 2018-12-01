@@ -20,7 +20,7 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       authRoutes       = require("./routes/index");
 
-// console.log(process.env.DATABASEURL);
+console.log(process.env.DATABASEURL);
 
 const url = process.env.DATABASEURL || "mongodb://localhost:27017/campground_app";
 mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true});
@@ -70,6 +70,6 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 // seedDB();
 
 const PORT = process.env.PORT||3000
-app.listen(PORT, function(req, res) {
+app.listen(PORT, process.env.IP, function(req, res) {
   console.log("The server is listening on port ", PORT);
 });
