@@ -13,7 +13,7 @@ const express               = require("express"),
       Campground            = require("./models/campground"),
       seedDB                = require("./seeds"),
       User                  = require("./models/user"),
-      Comment               = require("./models/comment");
+      Comment               = require("./models/comment");      
 
 //requiring routes
 const commentRoutes    = require("./routes/comments"),
@@ -29,6 +29,12 @@ mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true});
 // mongoose.connect("mongodb://deepali:Mango2018deployWebpages@ds111476.mlab.com:11476/yelpcamp1", {useNewUrlParser: true});
 
 //tell express to use body-parser and other middleware
+
+
+
+secretAccessKey = process.env.GMAILPW;
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
