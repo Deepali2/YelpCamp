@@ -94,3 +94,23 @@ in ten second intervals): */
 .no-cssanimations .slideshow li {
   opacity: 1;
 }
+
+h1, .viewCampgrounds {
+  transform: scale(1);
+  transition: transform 1s 100ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
+}
+
+
+h1:hover {
+  color: #3333ff;
+  transform: scale(2) rotate(-8deg);
+  transition: color 1s cubic-bezier(0.305, 0.360, 0.550, 1.380),
+               transform 1s 100ms cubic-bezier(0.305, 0.360, 0.550, 1.380);
+}
+
+.viewCampgrounds:hover{
+  color: #3333ff;
+  transform: scale(1.5);
+  transition: color 1s cubic-bezier(0.305, 0.360, 0.550, 1.380),
+               transform 1s 100ms cubic-bezier(0.305, 0.360, 0.550, 1.380);
+}
