@@ -31,3 +31,33 @@ h1 {
   text-align: center
 }
 
+@keyframes rainbowtext {
+  0% {
+    color: rgb(39, 27, 27); 
+    /* font-size: 1em; */
+  }
+  25% {
+    color: rgb(78, 49, 49);
+  }
+  50% {
+    color: #001a00;
+    transform: translateX(20px);
+    /* font-size: 1.5em; */
+  }
+  75% {
+    color: rgb(78, 49, 49);
+  }
+  100% {
+    color: rgb(39, 27, 27); 
+    /* font-size: 1em; */
+  }
+}
+
+h1 {
+  animation-name: rainbowtext;
+  animation-duration: 10s;
+  animation-timing-function: cubic-bezier(0.230, -0.295, 0.550, 1.380); 
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
