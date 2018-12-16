@@ -2,15 +2,18 @@
 
   <div class="container">
     <header class="jumbotron">
-      <div class="container">
+      
+      <div class="sky">
+        <div class="sun"></div>
+        <div class="grass"></div>
+      </div>
+      
+      <div class="container">          
         <h1>Welcome to Camp Grounds</h1>
-        <p class="viewcamp">View our hand-picked campgrounds from all over the world</p>
-        <p>          
-          <a href="/campgrounds/new" class="btn btn-primary btn-large">Add New Campground</a>
-        </p>
-      </div>      
-    </header>  
-    
+        <p class="viewcamp">View our hand-picked campgrounds from all over the world</p>   
+        <p><a href="/campgrounds/new" class="btn btn-primary btn-large">Add New Campground</a></p>
+      </div>            
+    </header> 
     <div id="listCampgrounds" class="row text-center">
       <%campgrounds.forEach(function(campground) {%>        
         <div class="col-md-3 col-sm-6">
